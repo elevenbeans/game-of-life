@@ -4,11 +4,11 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");  //css单独打包
 var path = require('path');
 console.log(process.env.NODE_ENV);
-module.exports = {
+
+var config = {
     //devtool: 'eval-source-map',
     entry: {
-        calculater: [   
-            'webpack/hot/dev-server',
+        game_of_life: [   
             __dirname + '/src/entry.jsx'
         ]//唯一入口文件
     },
@@ -17,9 +17,7 @@ module.exports = {
         publicPath: '/dist/', //静态资源文件内的请求路径指向静态资源服务器
         filename: '[name].bundle.js' //打包后输出文件的文件名
     },
-    externals: {
-        'zepto': 'window.$'
-    },
+
     module: {
         loaders: [
             { test: /\.(js|jsx)$/, loader: "jsx!babel", include: /src/},
@@ -53,3 +51,13 @@ module.exports = {
     ]
 
 }
+
+if(process.env.NODE_ENV !== 'dev-HMR'){
+    config.externals = { // dev 这里应该不加 react 和 react-dom 的 external, build 要加
+        'zepto': 'window.$',
+        'react':'window.React',
+        'react-dom':'window.ReactDOM'
+    };
+};
+
+module.exports = config;
