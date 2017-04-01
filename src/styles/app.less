@@ -1,5 +1,44 @@
+@young-color: grey;
+@old-color: white;
+@dead-color: black;
+
 html,body{
-	margin: 0;
+	margin: 9px;
 	padding: 0;
-	background-color: grey;
+	background-color: @young-color;
+}
+
+h1{
+	display: block;
+	width: 800px;
+	text-align: center;
+	margin: 0 auto;
+	color: @old-color;
+}
+
+.pannel{
+	display: flex;
+	// flex-direction: row;
+	flex-wrap:wrap;
+ 	// align-items: flex-start;
+	margin: 18px auto;
+	width: 800px;
+	height: 600px;
+	background-color: @dead-color;
+	border: 4px #ccc solid;
+	.cell{
+		width: 9px;
+		height: 9px;
+		border-right: 1px #333 solid;
+		border-bottom: 1px #333 solid;
+	}
+	.dead{
+		background-color: @dead-color;
+	}
+	.young{
+		background-color: @young-color;
+	}
+	.old{
+		background-color: @old-color;
+	}
 }

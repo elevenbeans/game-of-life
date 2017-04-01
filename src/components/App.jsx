@@ -5,11 +5,12 @@ import ReactDom from 'react-dom';
 
 import Pannel from './pannel';
 // console.log(Pannel);
+
+
 const App = () => (
     <div>
-        <div className = "pannel">
-					<Pannel />
-        </div>
+    	<h1>ReactJS Game of Life (click to learn more)</h1>
+			<Pannel />
     </div>
 );
 

@@ -38,7 +38,7 @@ var config = {
         colors: true,  //终端中输出结果为彩色
         //historyApiFallback: true,  //不跳转
         inline: true,  
-        hot: process.env.NODE_ENV === 'dev-HMR' //实时刷新
+        hot: process.env.NODE_ENV === 'dev-HMR' //Hot module replacement
     },
     resolve: {
         root: path.resolve(__dirname, "./src"),
@@ -52,9 +52,8 @@ var config = {
 
 }
 
-if(process.env.NODE_ENV !== 'dev-HMR'){
-    config.externals = { // dev 这里应该不加 react 和 react-dom 的 external, build 要加
-        'zepto': 'window.$',
+if(process.env.NODE_ENV !== 'dev-HMR' && process.env.NODE_ENV !== 'dev') {
+    config.externals = { // dev 这里应该不加 react 和 react-dom 的 external, prd 要加
         'react':'window.React',
         'react-dom':'window.ReactDOM'
     };
