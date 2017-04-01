@@ -9,7 +9,9 @@ import Pannel from './pannel';
 
 const App = () => (
     <div>
-    	<h1>ReactJS Game of Life (click to learn more)</h1>
+    	<h1>ReactJS Game of Life 
+    		<a target="_blank" href="https://www.math.cornell.edu/~lipa/mec/lesson6.html"> (Click to learn more)</a>
+    	</h1>
 			<Pannel />
     </div>
 );
