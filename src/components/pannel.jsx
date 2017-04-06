@@ -14,12 +14,18 @@ let mock = [];
 
 for(var i = 0; i < LINE*HEIGHT; i++){
 
+  if(i==4388 || i==4389 || i==4390){
+    mock.push({
+      index: i,
+      statue: 1
+    });
+  }
 	// Glider
-	if(i==101 || i==182 || i==260 || i==261 || i==262){
-			mock.push({
-				index: i,
-				statue: 1
-			});
+	else if(i==101 || i==182 || i==260 || i==261 || i==262){
+		mock.push({
+			index: i,
+			statue: 1
+		});
 	}
 	// Small Exploder
 	else if(i==1101 || i==1102 || i==1103 || i==1181 || i==1183 ||
@@ -50,7 +56,6 @@ class Pannel extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	cellsData: mock,
     	cells: []
     };
   }
@@ -61,33 +66,25 @@ class Pannel extends Component {
   	var _self = this;
 
 		function runIt() {
-			var _temp = [];
 			setTimeout(function() {
-				// debugger
 
 			  _self.updateCell();
 
 				for(var i = 0; i < LINE*HEIGHT; i++){
-			 		_temp.push(_self.checkAround(i));
+			 		_self.checkAround(i);
 			 	}
 
-			 	// console.log(_temp);
-
-			 	_self.setState({
-			 		cellData: _temp
-			 	},function(){
-			 		setTimeout(function() {
-						runIt();
-					},10);
-			 	});
+		 		setTimeout(function() {
+					runIt();
+				},100);
 
 			},0);
 		};
 		runIt();
   }
-  checkAround(key) { //
+  checkAround(key) {
   	//debugger
-  	var _cellsData = this.state.cellsData;
+  	var _cellsData = mock;
   	var _aliveNeiboursNum = 0;
   	var _leftTop = _cellsData[key - LINE - 1],
 				_middleTop = _cellsData[key - LINE],
@@ -162,7 +159,7 @@ class Pannel extends Component {
   updateCell(){
   	var _cells = [];
   	// debugger
-  	this.state.cellsData.map(function(item, index){
+  	mock.map(function(item, index){
 		  _cells.push(
 				<Cell
 					key = {item.index}
