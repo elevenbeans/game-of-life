@@ -5,12 +5,11 @@ The Game of Life, also known simply as Life, is a cellular automaton devised by 
 
 # Rules
 
-给出一个m*n的细胞矩阵，每个细胞都有一个初始状态：生存（1）或死亡（0）。每个细胞的变化都与它周围8个细胞有关，规则如下：
+Given a board with m by n cells, each cell has an initial state live (1) or dead (0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):
 
-+ 当前细胞为存活状态时，当周围存活细胞不到2个时， 该细胞变成死亡状态。（模拟生命数量稀少）
+ 
 
-+ 当前细胞为存活状态时，当周围有2个或3个存活的细胞时， 该细胞保持原样。
-
-+ 当前细胞为存活状态时，当周围有3个以上的存活细胞时，该细胞变成死亡状态。（模拟生命数量过多）
-
-+ 当前细胞为死亡状态时，当周围恰好有3个存活细胞时，该细胞变成存活状态。 （模拟繁殖）
++ Any live cell with fewer than two live neighbors dies, as if caused by under-population.
++ Any live cell with two or three live neighbors lives on to the next generation.
++ Any live cell with more than three live neighbors dies, as if by over-population..
++ Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
