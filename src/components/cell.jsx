@@ -30,7 +30,7 @@ class Cell extends Component {
   	}
   	return(
   		<div
-  			id = {"cell" + this.props.index + 1}
+  			id = {"cell" + this.props.index}
   			className = {"cell " + _type}>
   		</div>
 

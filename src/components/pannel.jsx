@@ -13,17 +13,32 @@ const HEIGHT = 60;
 let mock = [];
 
 for(var i = 0; i < LINE*HEIGHT; i++){
-	if(i%5==0 && i>2200 && i<2500){
+
+	// Glider
+	// if(i==101 || i==182 || i==260 || i==261 || i==262){
+	// 		mock.push({
+	// 			index: i,
+	// 			statue: 1
+	// 		});
+	// }
+	// Small Exploder
+	// if(i==2101 || i==2102 || i==2103 || i==2181 || i==2183 ||
+	// 	i==2261 || i==2263 || i==2342){
+	// 		mock.push({
+	// 			index: i,
+	// 			statue: 1
+	// 		});
+	// }
+	// 10 cells row
+	if(i==2500 || i==2501 || i==2502 || i==2503 || 
+		i==2504 || i==2505 || i==2506 || i==2507 || 
+		i==2508 || i==2509 || i==2510 ){
 			mock.push({
 				index: i,
 				statue: 1
 			});
-	}	else if(i%7==0 && i>2200 && i<2500){
-			mock.push({
-				index: i,
-				statue: 3
-			});
-	}else {
+	}
+	else {
 			mock.push({
 				index: i,
 				statue: 0
@@ -46,29 +61,32 @@ class Pannel extends Component {
   	var _self = this;
 
 		function runIt() {
-			// console.log('1');
 			var _temp = [];
 			setTimeout(function() {
+				// debugger
+
+			  _self.updateCell();
+
 				for(var i = 0; i < LINE*HEIGHT; i++){
 			 		_temp.push(_self.checkAround(i));
 			 	}
 
+			 	// console.log(_temp);
+
 			 	_self.setState({
-			 			cellData: _temp
+			 		cellData: _temp
+			 	},function(){
+			 		setTimeout(function() {
+						runIt();
+					},10);
 			 	});
-
-			  _self.updateCell();
-
-				setTimeout(function() {
-					runIt();
-				},10);
 
 			},0);
 		};
 		runIt();
   }
   checkAround(key) { //
-  	// debugger
+  	//debugger
   	var _cellsData = this.state.cellsData;
   	var _aliveNeiboursNum = 0;
   	var _leftTop = _cellsData[key - LINE - 1],
@@ -79,29 +97,29 @@ class Pannel extends Component {
 				_bottom = _cellsData[key + LINE],
 				_leftBottom = _cellsData[key + LINE - 1],
 				_left = _cellsData[key - 1];
-  	// debugger
-  	if(_leftTop && _leftTop.statue%2 !== 0){ // leftTop
+
+  	if(_leftTop && (_leftTop.statue == 1 || _leftTop.statue == 2)){ // leftTop
   		_aliveNeiboursNum++;
   	}
-  	if(_middleTop && _middleTop.statue%2 !== 0){ // middleTop
+  	if(_middleTop && (_middleTop.statue == 1 || _middleTop.statue == 2)){ // middleTop
   		_aliveNeiboursNum++;
   	}
-  	if(_rightTop && _rightTop.statue%2 !== 0){ // rightTop
+  	if(_rightTop && (_rightTop.statue == 1 || _rightTop.statue == 2)){ // rightTop
   		_aliveNeiboursNum++;
   	}
-  	if(_right && _right.statue%2 !== 0){ // right
+  	if(_right && _right.statue%2 == 1 ){ // right
   		_aliveNeiboursNum++;
   	}
-  	if(_rightBottom && _rightBottom.statue%2 !== 0){ // rightBottom
+  	if(_rightBottom && _rightBottom.statue%2 == 1 ){ // rightBottom
   		_aliveNeiboursNum++;
   	}
-  	if(_bottom && _bottom.statue%2 !== 0){ // bottom
+  	if(_bottom && _bottom.statue%2 == 1){ // bottom
   		_aliveNeiboursNum++;
   	}
-  	if(_leftBottom && _leftBottom.statue%2 !== 0){ // leftBottom
+  	if(_leftBottom && _leftBottom.statue%2 == 1 ){ // leftBottom
   		_aliveNeiboursNum++;
   	}
-  	if(_left && _left.statue%2 !== 0){ // left
+  	if(_left && (_left.statue == 1 || _left.statue == 2)){ // left
   		_aliveNeiboursNum++;
   	}
 
@@ -110,39 +128,33 @@ class Pannel extends Component {
   		// dead
   		if(_cellsData[key].statue%2 === 1){ // live2death
   			_cellsData[key].statue = 2;
-  		}
-  		if(_cellsData[key].statue%2 === 0){ // death2death
+  		} else if (_cellsData[key].statue%2 === 0){ // death2death
   			_cellsData[key].statue = 0;
   		}
-  	} else if(_aliveNeiboursNum === 2 ||
-  		_aliveNeiboursNum === 3){
+  	} else if(_aliveNeiboursNum === 2){
   		// alive
   		if(_cellsData[key].statue%2 === 1){ // live2live
   			_cellsData[key].statue = 1;
+  		} else if(_cellsData[key].statue%2 === 0){ // death2death
+  			_cellsData[key].statue = 0;
   		}
-  		// if(_cellsData[key].statue%2 === 0){ // death2live
-  		// 	_cellsData[key].statue = 3;
-  		// }
+
   	} else if(_aliveNeiboursNum > 3){
   		// dead
   		if(_cellsData[key].statue%2 === 1){ // live2death
   			_cellsData[key].statue = 2;
-  		}
-  		if(_cellsData[key].statue%2 === 0){ // death2death
+  		} else if (_cellsData[key].statue%2 === 0){ // death2death
   			_cellsData[key].statue = 0;
   		}
   	} 
 
   	if(_aliveNeiboursNum === 3){
-  		//if(_cellsData[key].statue%2 === 0){
   			// relive
 	  		if(_cellsData[key].statue%2 === 1){ // live2live
 	  			_cellsData[key].statue = 1;
-	  		}
-	  		if(_cellsData[key].statue%2 === 0){ // death2live
+	  		} else if (_cellsData[key].statue%2 === 0){ // death2live
 	  			_cellsData[key].statue = 3;
 	  		}
-  		//}
   	}
 	  return _cellsData[key];
   }
@@ -161,7 +173,7 @@ class Pannel extends Component {
   	});
 
 		this.setState({
-			cells:_cells
+			cells: _cells
 		});
   }
   render() {
