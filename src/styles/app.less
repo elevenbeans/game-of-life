@@ -1,104 +1,168 @@
-@young-color: pink;
-@old-color: red;
-@dead-color: black;
-@font-color: white;
-@bg-color: grey;
-html,body{
-	margin: 12px;
-	padding: 0;
-	background-color: @bg-color;
+@bg-primary: #211E1E;
+@bg-surface: #2A2626;
+@border-color: #3A3535;
+@text-primary: #F1ECEC;
+@text-secondary: #CFCECD;
+@accent: #656363;
+@accent-dark: #4B4646;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1{
-	display: block;
-	width: 800px;
-	text-align: center;
-	margin: 0 auto;
-	color: @font-color;
-	text-shadow:@dead-color 2px 2px;
-	a{
-		color: @font-color;
-		font-size: 20px;
-		text-shadow:@dead-color 0px 0px;
-	}
+html, body {
+  background-color: @bg-primary;
+  color: @text-primary;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-.controls{
-	width: 800px;
-	margin: 0 auto;
-	text-align: center;
-	button{
-		margin: 4px;
-		padding: 6px 14px;
-		font-size: 14px;
-		cursor: pointer;
-		border: 1px solid #999;
-		border-radius: 4px;
-		background: #eee;
-		&:hover{
-			background: #ddd;
-		}
-	}
-	.btn-start{
-		background: #4caf50;
-		color: white;
-		border-color: #388e3c;
-		&:hover{
-			background: #388e3c;
-		}
-	}
-	.btn-pause{
-		background: #ff9800;
-		color: white;
-		border-color: #e65100;
-		&:hover{
-			background: #e65100;
-		}
-	}
-	.btn-resume{
-		background: #2196f3;
-		color: white;
-		border-color: #1565c0;
-		&:hover{
-			background: #1565c0;
-		}
-	}
-	.btn-clear{
-		background: #f44336;
-		color: white;
-		border-color: #c62828;
-		&:hover{
-			background: #c62828;
-		}
-	}
+.page {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
 }
 
-.pannel{
-	display: flex;
-	// flex-direction: row;
-	flex-wrap:wrap;
- 	// align-items: flex-start;
-	margin: 18px auto;
-	width: 800px;
-	height: 600px;
-	background-color: @dead-color;
-	border: 6px #ccc solid;
-	.cell{
-		width: 9px;
-		height: 9px;
-		border-right: 1px #333 solid;
-		border-bottom: 1px #333 solid;
-	}
-	&.editing .cell{
-		cursor: pointer;
-	}
-	.dead{
-		background-color: @dead-color;
-	}
-	.young{
-		background-color: @young-color;
-	}
-	.old{
-		background-color: @old-color;
-	}
+.site-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: @text-primary;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: @text-secondary;
+
+    a {
+      color: @text-secondary;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: @accent;
+
+      &:hover {
+        color: @text-primary;
+      }
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+
+  button {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-family: inherit;
+    color: @text-secondary;
+    background: transparent;
+    border: 1px solid @border-color;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: @text-primary;
+      border-color: @accent;
+      background: rgba(255, 255, 255, 0.04);
+    }
+  }
+
+  .btn-start {
+    color: @text-primary;
+    border-color: @accent;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: @text-secondary;
+    }
+  }
+
+  .btn-pause {
+    color: @text-primary;
+    border-color: @accent;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: @text-secondary;
+    }
+  }
+
+  .btn-resume {
+    color: @text-primary;
+    border-color: @accent;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: @text-secondary;
+    }
+  }
+
+  .btn-clear {
+    color: @text-secondary;
+    border-color: @border-color;
+
+    &:hover {
+      color: #f48771;
+      border-color: #f48771;
+      background: rgba(244, 135, 113, 0.06);
+    }
+  }
+}
+
+.pannel {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 800px;
+  background-color: @bg-surface;
+  border: 1px solid @border-color;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .cell {
+    width: 9px;
+    height: 9px;
+    border-right: 1px solid @border-color;
+    border-bottom: 1px solid @border-color;
+    transition: background-color 0.1s ease;
+  }
+
+  &.editing .cell {
+    cursor: pointer;
+
+    &:hover {
+      background-color: fade(@text-primary, 10%) !important;
+    }
+  }
+
+  .dead {
+    background-color: @bg-surface;
+  }
+
+  .young {
+    background-color: @accent;
+  }
+
+  .old {
+    background-color: @text-primary;
+  }
+
+  .died {
+    background-color: @accent-dark;
+  }
 }

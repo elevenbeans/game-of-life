@@ -8,15 +8,16 @@ import Pannel from './pannel';
 
 
 const App = () => (
-  <div>
-    <h1>ReactJS Game of Life &nbsp;
-      <a
-        target="_blank"
-        href="https://www.math.cornell.edu/~lipa/mec/lesson6.html" rel="noreferrer"
-      >
-          (Click to learn more)
-      </a>
-    </h1>
+  <div className="page">
+    <header className="site-header">
+      <h1>Game of Life</h1>
+      <p className="subtitle">
+        Conway&apos;s cellular automaton &mdash;&nbsp;
+        <a target="_blank" href="https://www.math.cornell.edu/~lipa/mec/lesson6.html" rel="noreferrer">
+          learn more
+        </a>
+      </p>
+    </header>
     <Pannel />
   </div>
 );

@@ -12,7 +12,7 @@ var Cell = React.memo(function Cell(props) {
     _type = 'old';
     break;
   case 2:
-    _type = 'dead';
+    _type = 'died';
     break;
   case 3:
     _type = 'young';

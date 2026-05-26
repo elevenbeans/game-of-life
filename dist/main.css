@@ -1,96 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html,
 body {
-  margin: 12px;
-  padding: 0;
-  background-color: grey;
+  background-color: #211E1E;
+  color: #F1ECEC;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
-h1 {
-  display: block;
-  width: 800px;
-  text-align: center;
+.page {
+  max-width: 840px;
   margin: 0 auto;
-  color: white;
-  text-shadow: black 2px 2px;
+  padding: 40px 20px 60px;
 }
-h1 a {
-  color: white;
-  font-size: 20px;
-  text-shadow: black 0px 0px;
+.site-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.site-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #F1ECEC;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.site-header .subtitle {
+  font-size: 14px;
+  color: #CFCECD;
+}
+.site-header .subtitle a {
+  color: #CFCECD;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #656363;
+}
+.site-header .subtitle a:hover {
+  color: #F1ECEC;
 }
 .controls {
-  width: 800px;
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 .controls button {
-  margin: 4px;
   padding: 6px 14px;
-  font-size: 14px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #CFCECD;
+  background: transparent;
+  border: 1px solid #3A3535;
+  border-radius: 6px;
   cursor: pointer;
-  border: 1px solid #999;
-  border-radius: 4px;
-  background: #eee;
+  transition: all 0.15s ease;
 }
 .controls button:hover {
-  background: #ddd;
+  color: #F1ECEC;
+  border-color: #656363;
+  background: rgba(255, 255, 255, 0.04);
 }
 .controls .btn-start {
-  background: #4caf50;
-  color: white;
-  border-color: #388e3c;
+  color: #F1ECEC;
+  border-color: #656363;
 }
 .controls .btn-start:hover {
-  background: #388e3c;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #CFCECD;
 }
 .controls .btn-pause {
-  background: #ff9800;
-  color: white;
-  border-color: #e65100;
+  color: #F1ECEC;
+  border-color: #656363;
 }
 .controls .btn-pause:hover {
-  background: #e65100;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #CFCECD;
 }
 .controls .btn-resume {
-  background: #2196f3;
-  color: white;
-  border-color: #1565c0;
+  color: #F1ECEC;
+  border-color: #656363;
 }
 .controls .btn-resume:hover {
-  background: #1565c0;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #CFCECD;
 }
 .controls .btn-clear {
-  background: #f44336;
-  color: white;
-  border-color: #c62828;
+  color: #CFCECD;
+  border-color: #3A3535;
 }
 .controls .btn-clear:hover {
-  background: #c62828;
+  color: #f48771;
+  border-color: #f48771;
+  background: rgba(244, 135, 113, 0.06);
 }
 .pannel {
   display: flex;
   flex-wrap: wrap;
-  margin: 18px auto;
+  margin: 0 auto;
   width: 800px;
-  height: 600px;
-  background-color: black;
-  border: 6px #ccc solid;
+  background-color: #2A2626;
+  border: 1px solid #3A3535;
+  border-radius: 8px;
+  overflow: hidden;
 }
 .pannel .cell {
   width: 9px;
   height: 9px;
-  border-right: 1px #333 solid;
-  border-bottom: 1px #333 solid;
+  border-right: 1px solid #3A3535;
+  border-bottom: 1px solid #3A3535;
+  transition: background-color 0.1s ease;
 }
 .pannel.editing .cell {
   cursor: pointer;
 }
+.pannel.editing .cell:hover {
+  background-color: rgba(241, 236, 236, 0.1) !important;
+}
 .pannel .dead {
-  background-color: black;
+  background-color: #2A2626;
 }
 .pannel .young {
-  background-color: pink;
+  background-color: #656363;
 }
 .pannel .old {
-  background-color: red;
+  background-color: #F1ECEC;
+}
+.pannel .died {
+  background-color: #4B4646;
 }
 
