@@ -313,8 +313,13 @@ class Pannel extends Component {
       controls = (
         <div className="controls">
           <button className="btn-start" onClick={function() { that.startOver(); }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M4 1.5L12 7L4 12.5V1.5Z" fill="currentColor"/>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+              stroke="currentColor" strokeWidth="1.3"
+              strokeLinecap="round" strokeLinejoin="round">
+              <path d="M2 7C2 4.23858 4.23858 2 7 2C8.86149 2 10.476 2.97266 11.3896 4.44472" />
+              <path d="M12 7C12 9.76142 9.76142 12 7 12C5.13851 12 3.524 11.0273 2.61045 9.55528" />
+              <path d="M9 4.5H11.5V2" />
+              <path d="M5 9.5H2.5V12" />
             </svg>
           </button>
         </div>
