@@ -3,8 +3,6 @@ The Game of Life, also known simply as Life, is a cellular automaton devised by 
 
 [Demo](https://elevenbeans.github.io/game-of-life/)
 
-<img src="./src/images/GOL.png" width="500px"/>
-
 # Rules
 
 Given a board with m by n cells, each cell has an initial state live (1) or dead (0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):
