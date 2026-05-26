@@ -7,8 +7,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: #211E1E;
-  color: #F1ECEC;
+  background-color: #FAFAFA;
+  color: #1A1A1A;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -20,27 +20,27 @@ body {
 }
 .site-header {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 .site-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #F1ECEC;
+  color: #1A1A1A;
   letter-spacing: -0.02em;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .site-header .subtitle {
   font-size: 14px;
-  color: #CFCECD;
+  color: #6B6B6B;
 }
 .site-header .subtitle a {
-  color: #CFCECD;
+  color: #6B6B6B;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: #656363;
+  text-decoration-color: #D4D4D4;
 }
 .site-header .subtitle a:hover {
-  color: #F1ECEC;
+  color: #1A1A1A;
 }
 .controls {
   display: flex;
@@ -54,84 +54,137 @@ body {
   padding: 6px 14px;
   font-size: 13px;
   font-family: inherit;
-  color: #CFCECD;
+  color: #6B6B6B;
   background: transparent;
-  border: 1px solid #3A3535;
+  border: 1px solid #E5E5E5;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 .controls button:hover {
-  color: #F1ECEC;
-  border-color: #656363;
-  background: rgba(255, 255, 255, 0.04);
+  color: #1A1A1A;
+  border-color: #B0B0B0;
+  background: rgba(0, 0, 0, 0.03);
 }
 .controls .btn-start {
-  color: #F1ECEC;
-  border-color: #656363;
+  color: #1A1A1A;
+  border-color: #B0B0B0;
 }
 .controls .btn-start:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: #CFCECD;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: #6B6B6B;
 }
 .controls .btn-pause {
-  color: #F1ECEC;
-  border-color: #656363;
+  color: #1A1A1A;
+  border-color: #B0B0B0;
 }
 .controls .btn-pause:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: #CFCECD;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: #6B6B6B;
 }
 .controls .btn-resume {
-  color: #F1ECEC;
-  border-color: #656363;
+  color: #1A1A1A;
+  border-color: #B0B0B0;
 }
 .controls .btn-resume:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: #CFCECD;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: #6B6B6B;
 }
 .controls .btn-clear {
-  color: #CFCECD;
-  border-color: #3A3535;
+  color: #6B6B6B;
+  border-color: #E5E5E5;
 }
 .controls .btn-clear:hover {
-  color: #f48771;
-  border-color: #f48771;
-  background: rgba(244, 135, 113, 0.06);
+  color: #c0392b;
+  border-color: #c0392b;
+  background: rgba(192, 57, 43, 0.04);
 }
 .pannel {
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
   width: 800px;
-  background-color: #2A2626;
-  border: 1px solid #3A3535;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E5E5;
   border-radius: 8px;
   overflow: hidden;
 }
 .pannel .cell {
   width: 10px;
   height: 10px;
-  border-right: 1px solid #3A3535;
-  border-bottom: 1px solid #3A3535;
+  border-right: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
   transition: background-color 0.1s ease;
 }
 .pannel.editing .cell {
   cursor: pointer;
 }
 .pannel.editing .cell:hover {
-  background-color: rgba(241, 236, 236, 0.1) !important;
+  background-color: rgba(26, 26, 26, 0.06) !important;
 }
 .pannel .dead {
-  background-color: #2A2626;
+  background-color: #FFFFFF;
 }
 .pannel .young {
-  background-color: #656363;
+  background-color: #B0B0B0;
 }
 .pannel .old {
-  background-color: #F1ECEC;
+  background-color: #1A1A1A;
 }
 .pannel .died {
-  background-color: #4B4646;
+  background-color: #E8E8E8;
+}
+.about {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid #E5E5E5;
+}
+.about h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-bottom: 12px;
+}
+.about p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #6B6B6B;
+  margin-bottom: 12px;
+}
+.about p:last-child {
+  margin-bottom: 0;
+}
+.about .rules {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.about .rules .rule {
+  flex: 1;
+  min-width: 180px;
+  padding: 14px;
+  background: #FAFAFA;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+}
+.about .rules .rule .rule-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin-bottom: 4px;
+}
+.about .rules .rule .rule-desc {
+  font-size: 13px;
+  color: #6B6B6B;
+  line-height: 1.5;
+}
+.about .rules .rule .rule-icon {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
