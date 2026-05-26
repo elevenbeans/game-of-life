@@ -20,7 +20,7 @@ const App = () => (
         The Game of Life is a cellular automaton devised by the British mathematician
         John Horton Conway in 1970. It is a <em>zero-player game</em> &mdash; its evolution
         is determined by its initial state, requiring no further input. Each cell on a
-        two-dimensional grid interacts with its eight neighbours according to four simple
+        two-dimensional grid interacts with its eight neighbors according to four simple
         rules, producing complex, often unpredictable patterns that can mimic living
         systems: birth, death, competition, and even reproduction.
       </p>
@@ -38,7 +38,7 @@ const App = () => (
             Birth
           </div>
           <div className="rule-desc">
-            A dead cell with exactly three live neighbours becomes alive.
+            A dead cell with exactly three live neighbors becomes alive.
           </div>
         </div>
         <div className="rule">
@@ -47,7 +47,7 @@ const App = () => (
             Survival
           </div>
           <div className="rule-desc">
-            A live cell with two or three live neighbours stays alive.
+            A live cell with two or three live neighbors stays alive.
           </div>
         </div>
         <div className="rule">
@@ -57,7 +57,7 @@ const App = () => (
           </div>
           <div className="rule-desc">
             A live cell with fewer than two (underpopulation) or more than three
-            (overpopulation) live neighbours dies.
+            (overpopulation) live neighbors dies.
           </div>
         </div>
       </div>
