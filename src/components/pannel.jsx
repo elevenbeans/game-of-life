@@ -338,8 +338,10 @@ class Pannel extends Component {
     return (
       <div>
         {controls}
-        <div className={'pannel' + (this.state.mode === 'editing' ? ' editing' : '')}>
-          {this.state.cells}
+        <div className="pannel-scroll">
+          <div className={'pannel' + (this.state.mode === 'editing' ? ' editing' : '')}>
+            {this.state.cells}
+          </div>
         </div>
       </div>
     );

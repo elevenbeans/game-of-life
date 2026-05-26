@@ -124,6 +124,11 @@ body {
   border-color: #c0392b;
   background: rgba(192, 57, 43, 0.04);
 }
+.pannel-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .pannel {
   display: flex;
   flex-wrap: wrap;
