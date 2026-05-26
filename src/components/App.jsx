@@ -10,10 +10,7 @@ const App = () => (
     <header className="site-header">
       <h1>Game of Life</h1>
       <p className="subtitle">
-        Conway&apos;s cellular automaton &mdash;&nbsp;
-        <a target="_blank" href="https://www.math.cornell.edu/~lipa/mec/lesson6.html" rel="noreferrer">
-          learn more
-        </a>
+        Conway&apos;s cellular automaton
       </p>
     </header>
     <Pannel />
