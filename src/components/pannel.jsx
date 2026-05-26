@@ -4,6 +4,7 @@ import React from 'react';
 import { Component } from 'react';
 
 import Cell from './cell';
+import LOCALES from '../i18n';
 
 const LINE = 80;
 const HEIGHT = 60;
@@ -48,6 +49,13 @@ var PATTERN_DEFS = [
     w: 3, h: 1
   }
 ];
+
+var PRESET_I18N = {
+  'Glider': 'glider',
+  'Small Exploder': 'smallExploder',
+  '10-cell Row': 'row10',
+  'Trio': 'trio'
+};
 
 class Pannel extends Component {
   constructor(props) {
@@ -263,13 +271,14 @@ class Pannel extends Component {
 
   render() {
     var that = this;
+    var t = LOCALES[this.props.locale] || LOCALES.en;
     var controls;
 
     if (this.state.mode === 'editing') {
       var presetButtons = Object.keys(PRESETS).map(function(name) {
         return (
           <button key={name} onClick={function() { that.loadPreset(name); }}>
-            {name}
+            {t[PRESET_I18N[name]] || name}
           </button>
         );
       });
@@ -300,13 +309,13 @@ class Pannel extends Component {
     } else if (this.state.mode === 'running') {
       controls = (
         <div className="controls">
-          <button className="btn-pause" onClick={function() { that.pause(); }}>Pause</button>
+          <button className="btn-pause" onClick={function() { that.pause(); }}>{t.pause}</button>
         </div>
       );
     } else if (this.state.mode === 'paused') {
       controls = (
         <div className="controls">
-          <button className="btn-resume" onClick={function() { that.resume(); }}>Resume</button>
+          <button className="btn-resume" onClick={function() { that.resume(); }}>{t.resume}</button>
         </div>
       );
     } else if (this.state.mode === 'stopped') {

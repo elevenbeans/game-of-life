@@ -42,6 +42,23 @@ body {
 .site-header .subtitle a:hover {
   color: #1A1A1A;
 }
+.site-header .lang-toggle {
+  margin-left: 10px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: inherit;
+  color: #6B6B6B;
+  background: transparent;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all 0.15s ease;
+}
+.site-header .lang-toggle:hover {
+  color: #1A1A1A;
+  border-color: #B0B0B0;
+}
 .controls {
   display: flex;
   flex-direction: column;
