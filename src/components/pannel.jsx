@@ -276,9 +276,13 @@ class Pannel extends Component {
 
       controls = (
         <div className="controls">
-          <button className="btn-start" onClick={function() { that.start(); }}>Start</button>
-          <button className="btn-clear" onClick={function() { that.clearGrid(); }}>Clear</button>
-          {presetButtons}
+          <div className="controls-row">
+            {presetButtons}
+          </div>
+          <div className="controls-row">
+            <button className="btn-start" onClick={function() { that.start(); }}>Start</button>
+            <button className="btn-clear" onClick={function() { that.clearGrid(); }}>Clear</button>
+          </div>
         </div>
       );
     } else if (this.state.mode === 'running') {

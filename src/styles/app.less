@@ -61,11 +61,18 @@ html, body {
 
 .controls {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
+
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
 
   button {
     padding: 6px 14px;
