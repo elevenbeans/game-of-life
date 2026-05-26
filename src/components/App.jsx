@@ -29,10 +29,10 @@ class App extends React.Component {
           <h1>{t.title}</h1>
           <p className="subtitle">
             {t.subtitle}
-            <button className="lang-toggle" onClick={function() { that.toggleLang(); }}>
-              {other === 'en' ? 'EN' : '\u4E2D\u6587'}
-            </button>
           </p>
+          <button className="lang-toggle" onClick={function() { that.toggleLang(); }}>
+            {other === 'en' ? 'EN' : '\u4E2D\u6587'}
+          </button>
         </header>
         <Pannel locale={this.state.locale} />
         <section className="about">

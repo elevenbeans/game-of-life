@@ -43,16 +43,18 @@ body {
   color: #1A1A1A;
 }
 .site-header .lang-toggle {
-  margin-left: 10px;
-  padding: 2px 8px;
-  font-size: 11px;
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 100;
+  padding: 10px 18px;
+  font-size: 15px;
   font-family: inherit;
   color: #6B6B6B;
-  background: transparent;
+  background: #FFFFFF;
   border: 1px solid #E5E5E5;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  vertical-align: middle;
   transition: all 0.15s ease;
 }
 .site-header .lang-toggle:hover {
