@@ -17,6 +17,55 @@ h1 a {
   font-size: 20px;
   text-shadow: black 0px 0px;
 }
+.controls {
+  width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.controls button {
+  margin: 4px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #eee;
+}
+.controls button:hover {
+  background: #ddd;
+}
+.controls .btn-start {
+  background: #4caf50;
+  color: white;
+  border-color: #388e3c;
+}
+.controls .btn-start:hover {
+  background: #388e3c;
+}
+.controls .btn-pause {
+  background: #ff9800;
+  color: white;
+  border-color: #e65100;
+}
+.controls .btn-pause:hover {
+  background: #e65100;
+}
+.controls .btn-resume {
+  background: #2196f3;
+  color: white;
+  border-color: #1565c0;
+}
+.controls .btn-resume:hover {
+  background: #1565c0;
+}
+.controls .btn-clear {
+  background: #f44336;
+  color: white;
+  border-color: #c62828;
+}
+.controls .btn-clear:hover {
+  background: #c62828;
+}
 .pannel {
   display: flex;
   flex-wrap: wrap;
@@ -31,6 +80,9 @@ h1 a {
   height: 9px;
   border-right: 1px #333 solid;
   border-bottom: 1px #333 solid;
+}
+.pannel.editing .cell {
+  cursor: pointer;
 }
 .pannel .dead {
   background-color: black;

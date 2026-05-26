@@ -5,152 +5,56 @@ import { Component } from 'react';
 
 import Cell from './cell';
 
-// 80*60
-
 const LINE = 80;
 const HEIGHT = 60;
 
-let mock = [];
-
-for (var i = 0; i < LINE * HEIGHT; i++) {
-  if (i === 4388 || i === 4389 || i === 4390) {
-    mock.push({
-      index: i,
-      statue: 1
-    });
-  } else if (i === 101 || i === 182 || i === 260 || i === 261 || i === 262) {
-    mock.push({
-      index: i,
-      statue: 1
-    });
-  } else if (i === 1101 || i === 1102 || i === 1103 || i === 1181 || i === 1183 ||
-    i === 1261 || i === 1263 || i === 1342) {
-    mock.push({
-      index: i,
-      statue: 1
-    });
-  } else if (i === 2500 || i === 2501 || i === 2502 || i === 2503 ||
-    i === 2504 || i === 2505 || i === 2506 || i === 2507 ||
-    i === 2508 || i === 2509 || i === 2510) {
-    mock.push({
-      index: i,
-      statue: 1
-    });
-  } else {
-    mock.push({
-      index: i,
-      statue: 0
-    });
-  }
-}
+var PRESETS = {
+  'Glider': [101, 182, 260, 261, 262],
+  'Small Exploder': [1101, 1102, 1103, 1181, 1183, 1261, 1263, 1342],
+  '10-cell Row': [2500, 2501, 2502, 2503, 2504, 2505, 2506, 2507, 2508, 2509, 2510],
+  'Trio': [4388, 4389, 4390]
+};
 
 class Pannel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cells: []
+      cells: [],
+      mode: 'editing'
     };
+    this.mock = this.initGrid();
+    this.timer = null;
   }
+
+  initGrid() {
+    var grid = [];
+    for (var i = 0; i < LINE * HEIGHT; i++) {
+      grid.push({ index: i, statue: 0 });
+    }
+    return grid;
+  }
+
   componentDidMount() {
-    this.initGame();
-  }
-  initGame() {
-    const runIt = () => {
-      setTimeout(() => {
-        this.updateCell();
-
-        for (var i = 0; i < LINE * HEIGHT; i++) {
-          this.checkAround(i);
-        }
-
-        setTimeout(() => {
-          runIt();
-        }, 100);
-      }, 0);
-    };
-    runIt();
-  }
-  checkAround(key) {
-    // debugger
-    var _cellsData = mock;
-    var _aliveNeiboursNum = 0;
-    var _leftTop = _cellsData[key - LINE - 1];
-    var _middleTop = _cellsData[key - LINE];
-    var _rightTop  = _cellsData[key - LINE + 1];
-    var _right  = _cellsData[key + 1];
-    var _rightBottom = _cellsData[key + LINE + 1];
-    var _bottom = _cellsData[key + LINE];
-    var _leftBottom = _cellsData[key + LINE - 1];
-    var _left = _cellsData[key - 1];
-
-    if (_leftTop && (_leftTop.statue === 1 || _leftTop.statue === 2)) { // leftTop
-      _aliveNeiboursNum++;
-    }
-    if (_middleTop && (_middleTop.statue === 1 || _middleTop.statue === 2)) { // middleTop
-      _aliveNeiboursNum++;
-    }
-    if (_rightTop && (_rightTop.statue === 1 || _rightTop.statue === 2)) { // rightTop
-      _aliveNeiboursNum++;
-    }
-    if (_right && _right.statue % 2 === 1) { // right
-      _aliveNeiboursNum++;
-    }
-    if (_rightBottom && _rightBottom.statue % 2 === 1) { // rightBottom
-      _aliveNeiboursNum++;
-    }
-    if (_bottom && _bottom.statue % 2 === 1) { // bottom
-      _aliveNeiboursNum++;
-    }
-    if (_leftBottom && _leftBottom.statue % 2 === 1) { // leftBottom
-      _aliveNeiboursNum++;
-    }
-    if (_left && (_left.statue === 1 || _left.statue === 2)) { // left
-      _aliveNeiboursNum++;
-    }
-
-    // update cellData
-    if (_aliveNeiboursNum < 2) {
-      // dead
-      if (_cellsData[key].statue % 2 === 1) { // live2death
-        _cellsData[key].statue = 2;
-      } else if (_cellsData[key].statue % 2 === 0) { // death2death
-        _cellsData[key].statue = 0;
-      }
-    } else if (_aliveNeiboursNum === 2) {
-      // alive
-      if (_cellsData[key].statue % 2 === 1) { // live2live
-        _cellsData[key].statue = 1;
-      } else if (_cellsData[key].statue % 2 === 0) { // death2death
-        _cellsData[key].statue = 0;
-      }
-    } else if (_aliveNeiboursNum > 3) {
-      // dead
-      if (_cellsData[key].statue % 2 === 1) { // live2death
-        _cellsData[key].statue = 2;
-      } else if (_cellsData[key].statue % 2 === 0) { // death2death
-        _cellsData[key].statue = 0;
-      }
-    }
-
-    if (_aliveNeiboursNum === 3) {
-      // relive
-      if (_cellsData[key].statue % 2 === 1) { // live2live
-        _cellsData[key].statue = 1;
-      } else if (_cellsData[key].statue % 2 === 0) { // death2live
-        _cellsData[key].statue = 3;
-      }
-    }
-    return _cellsData[key];
+    this.renderGrid('editing');
   }
 
-  updateCell() {
-    var _cells = [];
-    mock.map(function(item) {
-      _cells.push(
+  componentWillUnmount() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+  }
+
+  renderGrid(mode) {
+    mode = mode || this.state.mode;
+    var that = this;
+    var isEditing = mode === 'editing';
+    var _cells = this.mock.map(function(item) {
+      return (
         <Cell
           key = {item.index}
           index = {item.index + 1}
-          type = {item.statue} // 0die 1old 2dead 3young
+          type = {item.statue}
+          onClick = {isEditing ? function() { that.handleCellClick(item.index); } : undefined}
         />
       );
     });
@@ -159,10 +63,171 @@ class Pannel extends Component {
       cells: _cells
     });
   }
+
+  handleCellClick(index) {
+    if (this.state.mode !== 'editing') {
+      return;
+    }
+    var cell = this.mock[index];
+    cell.statue = cell.statue === 0 ? 1 : 0;
+    this.renderGrid('editing');
+  }
+
+  loadPreset(name) {
+    var cells = PRESETS[name];
+    if (!cells) {
+      return;
+    }
+    for (var i = 0; i < LINE * HEIGHT; i++) {
+      this.mock[i].statue = 0;
+    }
+    for (var j = 0; j < cells.length; j++) {
+      this.mock[cells[j]].statue = 1;
+    }
+    this.renderGrid('editing');
+  }
+
+  clearGrid() {
+    for (var i = 0; i < LINE * HEIGHT; i++) {
+      this.mock[i].statue = 0;
+    }
+    this.renderGrid('editing');
+  }
+
+  start() {
+    this.setState({ mode: 'running' });
+    this.renderGrid('running');
+    this.startLoop();
+  }
+
+  startLoop() {
+    var that = this;
+    var runIt = function() {
+      that.renderGrid('running');
+
+      for (var i = 0; i < LINE * HEIGHT; i++) {
+        that.checkAround(i);
+      }
+
+      that.timer = setTimeout(function() {
+        runIt();
+      }, 100);
+    };
+    runIt();
+  }
+
+  pause() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    this.setState({ mode: 'paused' });
+    this.renderGrid('paused');
+  }
+
+  resume() {
+    this.setState({ mode: 'running' });
+    this.renderGrid('running');
+    this.startLoop();
+  }
+
+  countAliveNeighbors(key) {
+    var _cellsData = this.mock;
+    var count = 0;
+    var _row = Math.floor(key / LINE);
+    var _col = key % LINE;
+
+    var neighbors = [
+      (_row > 0 && _col > 0) ? _cellsData[key - LINE - 1] : null,
+      (_row > 0) ? _cellsData[key - LINE] : null,
+      (_row > 0 && _col < LINE - 1) ? _cellsData[key - LINE + 1] : null,
+      (_col < LINE - 1) ? _cellsData[key + 1] : null,
+      (_row < HEIGHT - 1 && _col < LINE - 1) ? _cellsData[key + LINE + 1] : null,
+      (_row < HEIGHT - 1) ? _cellsData[key + LINE] : null,
+      (_row < HEIGHT - 1 && _col > 0) ? _cellsData[key + LINE - 1] : null,
+      (_col > 0) ? _cellsData[key - 1] : null
+    ];
+
+    for (var i = 0; i < 8; i++) {
+      if (neighbors[i] && neighbors[i].statue % 2 === 1) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  checkAround(key) {
+    var _cellsData = this.mock;
+    var _aliveNeiboursNum = this.countAliveNeighbors(key);
+
+    if (_aliveNeiboursNum < 2) {
+      if (_cellsData[key].statue % 2 === 1) {
+        _cellsData[key].statue = 2;
+      } else {
+        _cellsData[key].statue = 0;
+      }
+    } else if (_aliveNeiboursNum === 2) {
+      if (_cellsData[key].statue % 2 === 1) {
+        _cellsData[key].statue = 1;
+      } else {
+        _cellsData[key].statue = 0;
+      }
+    } else if (_aliveNeiboursNum === 3) {
+      if (_cellsData[key].statue % 2 === 1) {
+        _cellsData[key].statue = 1;
+      } else {
+        _cellsData[key].statue = 3;
+      }
+    } else {
+      if (_cellsData[key].statue % 2 === 1) {
+        _cellsData[key].statue = 2;
+      } else {
+        _cellsData[key].statue = 0;
+      }
+    }
+    return _cellsData[key];
+  }
+
   render() {
+    var that = this;
+    var controls;
+
+    if (this.state.mode === 'editing') {
+      var presetButtons = Object.keys(PRESETS).map(function(name) {
+        return (
+          <button key={name} onClick={function() { that.loadPreset(name); }}>
+            {name}
+          </button>
+        );
+      });
+
+      controls = (
+        <div className="controls">
+          <button className="btn-start" onClick={function() { that.start(); }}>Start</button>
+          <button className="btn-clear" onClick={function() { that.clearGrid(); }}>Clear</button>
+          {presetButtons}
+        </div>
+      );
+    } else if (this.state.mode === 'running') {
+      controls = (
+        <div className="controls">
+          <button className="btn-pause" onClick={function() { that.pause(); }}>Pause</button>
+        </div>
+      );
+    } else {
+      controls = (
+        <div className="controls">
+          <button className="btn-resume" onClick={function() { that.resume(); }}>Resume</button>
+        </div>
+      );
+    }
+
     return (
-      <div className = "pannel">
-        {this.state.cells}
+      <div>
+        {controls}
+        <div className={'pannel' + (this.state.mode === 'editing' ? ' editing' : '')}>
+          {this.state.cells}
+        </div>
       </div>
     );
   }
