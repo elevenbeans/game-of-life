@@ -15,6 +15,40 @@ var PRESETS = {
   'Trio': [4388, 4389, 4390]
 };
 
+var PATTERN_DEFS = [
+  {
+    offsets: [
+      { r: 0, c: 1 }, { r: 1, c: 2 }, { r: 2, c: 0 },
+      { r: 2, c: 1 }, { r: 2, c: 2 }
+    ],
+    w: 3, h: 3
+  },
+  {
+    offsets: [
+      { r: 0, c: 0 }, { r: 0, c: 1 }, { r: 0, c: 2 },
+      { r: 1, c: 0 }, { r: 1, c: 2 },
+      { r: 2, c: 0 }, { r: 2, c: 2 },
+      { r: 3, c: 1 }
+    ],
+    w: 3, h: 4
+  },
+  {
+    offsets: [
+      { r: 0, c: 0 }, { r: 0, c: 1 }, { r: 0, c: 2 },
+      { r: 0, c: 3 }, { r: 0, c: 4 }, { r: 0, c: 5 },
+      { r: 0, c: 6 }, { r: 0, c: 7 }, { r: 0, c: 8 },
+      { r: 0, c: 9 }, { r: 0, c: 10 }
+    ],
+    w: 11, h: 1
+  },
+  {
+    offsets: [
+      { r: 0, c: 0 }, { r: 0, c: 1 }, { r: 0, c: 2 }
+    ],
+    w: 3, h: 1
+  }
+];
+
 class Pannel extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +69,19 @@ class Pannel extends Component {
   }
 
   componentDidMount() {
+    this.scatterPatterns(10);
     this.renderGrid('editing');
+  }
+
+  scatterPatterns(count) {
+    for (var n = 0; n < count; n++) {
+      var pat = PATTERN_DEFS[Math.floor(Math.random() * PATTERN_DEFS.length)];
+      var startRow = Math.floor(Math.random() * (HEIGHT - pat.h + 1));
+      var startCol = Math.floor(Math.random() * (LINE - pat.w + 1));
+      for (var i = 0; i < pat.offsets.length; i++) {
+        this.mock[(startRow + pat.offsets[i].r) * LINE + startCol + pat.offsets[i].c].statue = 1;
+      }
+    }
   }
 
   componentWillUnmount() {
