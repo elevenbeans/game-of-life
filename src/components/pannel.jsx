@@ -155,11 +155,38 @@ class Pannel extends Component {
         that.checkAround(i);
       }
 
+      var changed = false;
+      for (var j = 0; j < LINE * HEIGHT; j++) {
+        if (that.mock[j].statue === 2 || that.mock[j].statue === 3) {
+          changed = true;
+          break;
+        }
+      }
+
+      if (!changed) {
+        that.setState({ mode: 'stopped' });
+        that.renderGrid('stopped');
+        return;
+      }
+
       that.timer = setTimeout(function() {
         runIt();
       }, 100);
     };
     runIt();
+  }
+
+  startOver() {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    for (var i = 0; i < LINE * HEIGHT; i++) {
+      this.mock[i].statue = 0;
+    }
+    this.scatterPatterns(10);
+    this.setState({ mode: 'editing' });
+    this.renderGrid('editing');
   }
 
   pause() {
@@ -260,10 +287,16 @@ class Pannel extends Component {
           <button className="btn-pause" onClick={function() { that.pause(); }}>Pause</button>
         </div>
       );
-    } else {
+    } else if (this.state.mode === 'paused') {
       controls = (
         <div className="controls">
           <button className="btn-resume" onClick={function() { that.resume(); }}>Resume</button>
+        </div>
+      );
+    } else if (this.state.mode === 'stopped') {
+      controls = (
+        <div className="controls">
+          <button className="btn-start" onClick={function() { that.startOver(); }}>Start Over</button>
         </div>
       );
     }
