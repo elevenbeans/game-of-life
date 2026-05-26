@@ -280,8 +280,20 @@ class Pannel extends Component {
             {presetButtons}
           </div>
           <div className="controls-row">
-            <button className="btn-start" onClick={function() { that.start(); }}>Start</button>
-            <button className="btn-clear" onClick={function() { that.clearGrid(); }}>Clear</button>
+            <button className="btn-start" onClick={function() { that.start(); }}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M4 1.5L12 7L4 12.5V1.5Z" fill="currentColor"/>
+              </svg>
+            </button>
+            <button className="btn-clear" onClick={function() { that.clearGrid(); }}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                stroke="currentColor" strokeWidth="1.2"
+                strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 3H12M5 3V2C5 1.44772 5.44772 1 6 1H8C8.55228 1 9 1.44772" />
+                <path d="M9 2V3M6 6V10M8 6V10M3 3L3.5 12.5C3.5 12.7761 3.72386 13" />
+                <path d="M4 13H10C10.2761 13 10.5 12.7761 10.5 12.5L11 3" />
+              </svg>
+            </button>
           </div>
         </div>
       );
@@ -300,7 +312,11 @@ class Pannel extends Component {
     } else if (this.state.mode === 'stopped') {
       controls = (
         <div className="controls">
-          <button className="btn-start" onClick={function() { that.startOver(); }}>Start Over</button>
+          <button className="btn-start" onClick={function() { that.startOver(); }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 1.5L12 7L4 12.5V1.5Z" fill="currentColor"/>
+            </svg>
+          </button>
         </div>
       );
     }
